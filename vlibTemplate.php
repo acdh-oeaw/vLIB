@@ -961,9 +961,11 @@ if (!defined('vlibTemplateClassLoaded'))
 				$regex.= ')?\s*';
 				$regex.= '(?:>|\/>|}|-->){1}';
 				$regex.= '/i';
-				$data = preg_replace_callback($regex, function ($m) {
-					return $this->_parseTag($m);
-				}, $data);
+				$self = $this;
+				$replace_callback = function ($m) use ($self) {
+					return $self->_parseTag($m);
+				};				
+				$data = preg_replace_callback($regex, $replace_callback, $data);
 // replaced because it's a known to have bad side effects see http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php#reference.pcre.pattern.modifiers.eval
 //				$regex.= '/ie';
 //				$data = preg_replace($regex,"\$this->_parseTag(array('\\0','\\1','\\2','\\3','\\4','\\5','\\6','\\7','\\8'));",$data);
