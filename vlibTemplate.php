@@ -915,14 +915,14 @@ if (!defined('vlibTemplateClassLoaded'))
 				$data = fread($fp = fopen($tmplfile, 'r'), filesize($tmplfile));
 				fclose($fp);
 
-				// xml check disabled see 1 below
+				// xml check disabled see 1 below, but it's now mandatory to turn off short_open_tag in php.ini.
 				// "<?xml" creates "Parse error!"
 				// $data = str_replace('<?xml', '<div style="margin-top: 20px; margin-bottom: 20px; font-size: 2.5em;"><strong>vLIB:</strong> Use "setVar()" to use &quot;&lt;?xml&quot; ...</div>', $data);
 
 				// check for PHP-Tags
 				$data = str_replace('<?php', '<div style="margin-top: 40px; margin-bottom: 40px; font-size: 2.5em;"><strong>vLIB:</strong> PHP is not allowed within the template ...</div>', $data);
 				$data = str_replace('<?=', '<div style="margin-top: 40px; margin-bottom: 40px; font-size: 2.5em;"><strong>vLIB:</strong> PHP is not allowed within the template ...</div>', $data);
-                // 1 modified to just allow <?x(ml ...)     
+                                // 1 modified to just allow <?x(ml ...)     
 				$data = preg_replace('/<[?][a-wy-zA-Z].*/', '<div style="margin-top: 40px; margin-bottom: 40px; font-size: 2.5em;"><strong>vLIB:</strong> PHP is not allowed within the template ...</div>', $data);
 
 				$regex = '/(<|<\/|{|{\/|<!--|<!--\/){1}\s*';
