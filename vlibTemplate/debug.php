@@ -10,6 +10,8 @@
 //
 // $Id: debug.php,v 1.5 2003/03/03 13:46:47 releasedj Exp $
 
+namespace clausvb\vlib;
+
 /**
  * Class uses all of vlibTemplate's functionality but debugs the template files.
  * Outputs a debug console to an html page, only use this for html files.

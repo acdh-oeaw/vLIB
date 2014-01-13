@@ -1,0 +1,7 @@
+{
+    "name": "clausvb/vlib",
+    "require": {
+        "php": ">=5.1.4"
+    },
+    "version": "4.2.1-p1"
+}

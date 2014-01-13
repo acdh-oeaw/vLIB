@@ -25,6 +25,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 */
 
+namespace clausvb\vlib;
+
 if (!defined('vlibIniClassLoaded'))
 {
 	define('vlibIniClassLoaded', 1);

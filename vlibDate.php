@@ -8,6 +8,7 @@
 // | Authors: Kelvin Jones, Claus van Beek, Stefan Deussen                  |
 // +------------------------------------------------------------------------+
 
+namespace clausvb\vlib;
 
 // check to avoid multiple including of class
 if (!defined('vlibDateClassLoaded'))
