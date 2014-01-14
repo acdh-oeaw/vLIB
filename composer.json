@@ -4,9 +4,9 @@
         "php": ">=5.3.3"
     },
     "version": "4.2.1-p2",
-	"autoload": {
-		"psr-4": {
-			"claus\\vb\\": ""
-		}
-	}
+    "autoload": {
+        "psr-4": {
+            "clausvb\\vlib\\": ""
+        }
+    }
 }
