@@ -1,7 +1,12 @@
 {
     "name": "clausvb/vlib",
     "require": {
-        "php": ">=5.1.4"
+        "php": ">=5.3.3"
     },
-    "version": "4.2.1-p1"
+    "version": "4.2.1-p2",
+	"autoload": {
+		"psr-4": {
+			"claus\\vb\\": ""
+		}
+	}
 }
