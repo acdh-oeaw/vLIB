@@ -10,6 +10,9 @@
 
 namespace clausvb\vlib;
 
+\mb_internal_encoding('UTF-8');
+\mb_regex_encoding('UTF-8'); 
+
 // check to avoid multiple including of class
 if (!defined('vlibTemplateClassLoaded'))
 {
@@ -1540,7 +1543,7 @@ if (!defined('vlibTemplateClassLoaded'))
 		function _escape_hex($str="", $entity=false) {
 			$prestr = $entity ? '&#x' : '%';
 			$poststr= $entity ? ';' : '';
-			for ($i=0; $i < strlen($str); $i++) {
+			for ($i=0; $i < mb_strlen($str); $i++) {
 				$return .= $prestr.bin2hex($str[$i]).$poststr;
 			}
 			return $return;

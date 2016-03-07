@@ -562,7 +562,7 @@ class vlibTemplateDebug extends vlibTemplate {
 
         $retstr .= "var vlib_debug_str2add = '';\n\n";
 
-        while (strlen($str) > 0)
+        while (mb_strlen($str) > 0)
         {
             $line = substr ($str, 0, $limit);
             $str  = substr ($str, $limit);

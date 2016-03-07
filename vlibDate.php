@@ -108,7 +108,7 @@ if (!defined('vlibDateClassLoaded'))
 			if (empty($day)) $day = $this->_dateNow('%d');
 
 			$output = '';
-			for ($strpos = 0; $strpos < strlen($format); $strpos++)
+			for ($strpos = 0; $strpos < mb_strlen($format); $strpos++)
 			{
 				$char = substr($format, $strpos, 1);
 
@@ -557,10 +557,10 @@ if (!defined('vlibDateClassLoaded'))
 		* @access public
 		*/
 		function isLeapYear ($year="") {
-			if (strlen($year) > 4) { // timestamp has bee parsed
+			if (mb_strlen($year) > 4) { // timestamp has bee parsed
 			 list ($day, $month, $year) = array_values($this->_breakTimestamp($year));
 			}
-			elseif (strlen($year) == 2) {
+			elseif (mb_strlen($year) == 2) {
 			 $year  = $this->getLongYear($year);
 			}
 			elseif (empty($year)) {
@@ -681,7 +681,7 @@ if (!defined('vlibDateClassLoaded'))
 		* @access public
 		*/
 		function getLongYear ($year) {
-			if (strlen($year) == 1) return ("200$year");
+			if (mb_strlen($year) == 1) return ("200$year");
 			if ($year > 50) {
 			 return ("19$year");
 			}
@@ -716,7 +716,7 @@ if (!defined('vlibDateClassLoaded'))
 		* @access public
 		*/
 		function daysInMonth ($month="", $year="") {
-			if (strlen($month) > 2) { // timestamp has bee parsed
+			if (mb_strlen($month) > 2) { // timestamp has bee parsed
 			 list ($day, $month, $year) = array_values($this->_breakTimestamp($month));
 			}
 			else {
@@ -1051,7 +1051,7 @@ if (!defined('vlibDateClassLoaded'))
 		function _breakTimestamp ($timestamp) {
 			$timestamp = preg_replace("/[\D]/", '', $timestamp); // remove all non digits
 
-			if (strlen($timestamp) == 8) {
+			if (mb_strlen($timestamp) == 8) {
 			 $year = substr($timestamp, 0, 4);
 			 $month= substr($timestamp, 4, 2);
 			 $day  = substr($timestamp, 6, 2);
