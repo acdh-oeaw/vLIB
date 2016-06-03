@@ -12,4 +12,4 @@ See [Wikipedia](https://en.wikipedia.org/wiki/VlibTemplate)
 
 ## Local mirror of docs
 
-The official site is not working correctly anymore. A copy mirrored of the documentation is in the docs folder. 
+The official site is not working correctly anymore. [A copy mirrored of the documentation is in the docs folder.](http://acdh-oeaw.github.io/vLIB) 
