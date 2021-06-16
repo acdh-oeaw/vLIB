@@ -62,6 +62,24 @@ Each option can be set in the vlibIni.php file which will mean that this value i
 <br>
     
 </li>
+
+<li>
+<b><FONT COLOR="#336699">INCLUDE_MODE</FONT></b>
+            - default mode for &lt;tmpl_include&gt;. There are 2 available modes:
+            <ol>
+              <li>
+                <b>PRECOMPILED</b> -
+                original include mode with precomilation of including files. Mode has recursion control (Default value)
+              </li>
+              <li>
+                <b>INLINE</b> -
+                include mode with ability to use loop vars in included files fits inside &lt;tmpl_loop&gt;.
+                ATTENTION! This mode has no recursion control.
+              </li>
+            </ol>
+<br>
+
+</li>
     
 <li>
 <b><FONT COLOR="#336699">GLOBAL_VARS</FONT></b>
