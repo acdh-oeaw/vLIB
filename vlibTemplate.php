@@ -289,10 +289,10 @@ if (!defined('vlibTemplateClassLoaded'))
 		 * @access public
 		 */
 		function setContextVars () {
-			$_phpself = @$GLOBALS['HTTP_SERVER_VARS']['PHP_SELF'];
-			$_pathinfo = @$GLOBALS['HTTP_SERVER_VARS']['PATH_INFO'];
-			$_request_uri = @$GLOBALS['HTTP_SERVER_VARS']['REQUEST_URI'];
-			$_qs   = @$GLOBALS['HTTP_SERVER_VARS']['QUERY_STRING'];
+			$_phpself = isset($GLOBALS['HTTP_SERVER_VARS']) ? @$GLOBALS['HTTP_SERVER_VARS']['PHP_SELF'] : @$_SERVER['PHP_SELF'];
+			$_pathinfo = isset($GLOBALS['HTTP_SERVER_VARS']['PATH_INFO']) ? @$GLOBALS['HTTP_SERVER_VARS']['PATH_INFO'] : (isset($_SERVER['PATH_INFO']) ? @$_SERVER['PATH_INFO'] : $_phpself);
+			$_request_uri = isset($GLOBALS['HTTP_SERVER_VARS']) ? @$GLOBALS['HTTP_SERVER_VARS']['REQUEST_URI'] : @$_SERVER['REQUEST_URI'];
+			$_qs   = isset($GLOBALS['HTTP_SERVER_VARS']) ? @$GLOBALS['HTTP_SERVER_VARS']['QUERY_STRING'] : @$_SERVER['QUERY_STRING'];
 
 			// the following fixes bug of $PHP_SELF on Win32 CGI and IIS.
 			$_self = (!empty($_pathinfo)) ? $_pathinfo : $_phpself;
@@ -1248,7 +1248,7 @@ if (!defined('vlibTemplateClassLoaded'))
 			$retstr .= 'print('.$beforevar.$var1.$aftervar.'); ';
 			$retstr .= '}';
 
-			if (@$var2) {
+			if (isset($var2) && $var2) {
 				$retstr .= ' elseif ('.$var2.' !== null) { ';
 				$retstr .= 'print('.$beforevar.$var2.$aftervar.'); ';
 				$retstr .= '}';
@@ -1307,6 +1307,8 @@ if (!defined('vlibTemplateClassLoaded'))
 			$wholetag = $args[0];
 			$openclose = $args[1];
 			$tag = strtolower($args[2]);
+
+			$value = $op = $escape = $format = NULL;
 
 			if ($tag == 'else') return '<?php } else { ?>';
 
