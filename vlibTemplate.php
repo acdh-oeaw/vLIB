@@ -40,6 +40,7 @@ if (!defined('vlibTemplateClassLoaded'))
 
 		var $OPTIONS = array(
 			'MAX_INCLUDES' => 2,
+			'INCLUDE_MODE' => 'PRECOMPILED',
 			'TEMPLATE_DIR' => null,
 			'GLOBAL_VARS' => null,
 			'GLOBAL_CONTEXT_VARS' => null,
@@ -947,7 +948,7 @@ if (!defined('vlibTemplateClassLoaded'))
 				$regex.= ')?\s*';
 				$regex.= '(?:';
 				$regex.=	'(?:';
-				$regex.=		'(name|format|escape|op|value)';
+				$regex.=		'(name|format|escape|op|value|mode)';
 				$regex.=		'\s*=\s*';
 				$regex.=	')';
 				$regex.=	'(?:[\"\'])?';
@@ -957,7 +958,7 @@ if (!defined('vlibTemplateClassLoaded'))
 				$regex.= ')?\s*';
 				$regex.= '(?:';
 				$regex.=	'(?:';
-				$regex.=		'(name|format|escape|op|value)';
+				$regex.=		'(name|format|escape|op|value|mode)';
 				$regex.=		'\s*=\s*';
 				$regex.=	')';
 				$regex.=	'(?:[\"\'])?';
@@ -1046,6 +1047,12 @@ if (!defined('vlibTemplateClassLoaded'))
 			// ..then check path from template file.
 			if (!empty($this->VLIBTEMPLATE_ROOT)) {
 				$fullpath = realpath($this->VLIBTEMPLATE_ROOT.'/'.$filepath.'/'.$filename);
+				if (is_file($fullpath)) return $fullpath;
+			}
+
+			// ..then check path of current template path (it's for included files)
+			if (isset($this->_tmplfilename)) {
+				$fullpath = realpath(dirname($this->_tmplfilename) . DIRECTORY_SEPARATOR . $filepath . DIRECTORY_SEPARATOR . $filename);
 				if (is_file($fullpath)) return $fullpath;
 			}
 
@@ -1389,7 +1396,13 @@ if (!defined('vlibTemplateClassLoaded'))
 				break;
 
 				case 'include':
-					return '<?php $this->_getData($this->_fileSearch(\''.$this->_parseIncludeFile($file).'\'), 1); ?>';
+					if ((!empty($mode) && strtolower($mode) == 'inline') || (isset($this->OPTIONS['INCLUDE_MODE']) && strtolower($this->OPTIONS['INCLUDE_MODE']) == 'inline')) {
+						// inline include mode
+						return ' ' . $this->_getData($this->_fileSearch($this->_parseIncludeFile($file)), 0) . ' ';
+					} else {
+						// precompiled ("original") include mode
+						return '<?php $this->_getData($this->_fileSearch(\''.$this->_parseIncludeFile($file).'\'), 1); ?>';
+					}
 				break;
 
 				default:
