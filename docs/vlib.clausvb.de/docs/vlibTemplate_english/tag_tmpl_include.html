@@ -66,15 +66,63 @@
 
     is installed.</P>
 
-  
-<P>As a protection against infinitly recursive includes, an arbitary limit of
+<p>
+  There are 2 available modes of including: <b>PRECOMPILED</b> and <b>INLINE</b>. It can be controlled by <b>MODE</b> attribute
+  of the tag or by global <b>OPTIONS['INCLUDE_MODE']</b>.
 
-    10 levels deep is imposed. You can alter this limit with the "MAX_INCLUDES"
+  <table width="100%" bgcolor="#676767">
+  <tr><td align="left"><font color="white">
+	Example
+  </font></td></tr>
+  <tr><td valign="middle" align="left" bgcolor="#E8E8E8"><pre>
+    &lt;TMPL_INCLUDE FILE='item.tmpl' MODE="INLINE"&gt;</pre></td></tr>
+  </table>
+</p>
 
-    OPTION. See the entry for this option below for more details.<br>
+<p>
+  In PRECOMPILED mode (default) file(s) to include are compiling before being included in parent template.
+  In this mode there are no ability to use loop vars inside included files, but there is
+  protection against infinitly recursive includes. An arbitary limit of 10 levels deep is imposed.
+  You can alter this limit with the <b>OPTIONS['MAX_INCLUDES']</b>. See the entry for this option below for more details.
+</p>
 
-  
-</P>
+<p>
+  In INLINE mode including files includes as inline. So you can use constructions like this:
+
+  <table width="100%" bgcolor="#676767">
+  <tr><td align="left"><font color="white">
+	index.tmpl
+  </font></td></tr>
+  <tr><td valign="middle" align="left" bgcolor="#E8E8E8"><pre>
+    &lt;h2&gt;First loop&lt;/h2&gt;
+    &lt;table&gt;
+      &lt;TMPL_LOOP NAME='data_1'&gt;
+        &lt;TMPL_INCLUDE FILE='item.tmpl' MODE="INLINE"&gt;
+      &lt;/TMPL_LOOP&gt;
+    &lt;/table&gt;
+
+    &lt;h2&gt;Second loop&lt;/h2&gt;
+    &lt;table&gt;
+      &lt;TMPL_LOOP NAME='data_2'&gt;
+        &lt;TMPL_INCLUDE FILE='item.tmpl' MODE="INLINE"&gt;
+      &lt;/TMPL_LOOP&gt;
+    &lt;/table&gt;</pre></td></tr>
+  </table><br>
+
+  <table width="100%" bgcolor="#676767">
+  <tr><td align="left"><font color="white">
+	item.tmpl
+  </font></td></tr>
+  <tr><td valign="middle" align="left" bgcolor="#E8E8E8"><pre>
+    &lt;tr&gt;
+      &lt;td&gt;&lt;TMPL_VAR NAME="date"&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;TMPL_VAR NAME="name"&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;TMPL_VAR NAME="status"&gt;&lt;/td&gt;
+    &lt;/tr&gt;</pre></td></tr>
+  </table><br>
+
+  But be warned that INLINE mode has no recursion control!
+</p>
 
 
 

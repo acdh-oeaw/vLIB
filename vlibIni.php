@@ -52,6 +52,9 @@ if (!defined('vlibIniClassLoaded'))
 
                         'MAX_INCLUDES' => 10,                      // Drill depth for tmpl_include's
 
+                        'INCLUDE_MODE' => 'PRECOMPILED',           // how to process include files
+                                                                   // 1 of the following: precompiled, inline
+
                         'GLOBAL_VARS' => 1,                        // if set to 1, any variables not found in a
                                                                    // loop will search for a global var as well
 
